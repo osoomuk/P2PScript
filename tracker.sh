@@ -22,4 +22,4 @@ fi
 cp ui.php /var/www/html/
 touch /dev/shm/Bittorrent.Peers
 chmod 777 /dev/shm/Bittorrent.Peers
-
+service apache2 restart
