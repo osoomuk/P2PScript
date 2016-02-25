@@ -19,4 +19,7 @@ if [ "$PHP" == "(none)" ]; then
 	echo 'Installing php'
 	apt-get install php5 libapache2-mod-php5 php5-mcrypt -y
 fi 
+cp ui.php /var/www/html/
+touch /dev/shm/Bittorrent.Peers
+chmod 777 /dev/shm/Bittorrent.Peers
 
