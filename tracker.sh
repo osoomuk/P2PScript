@@ -1,5 +1,9 @@
 #/bin/bash 
-
+if [ -z "$1" ]; then
+	echo "Please insert seed file name as a argument"
+	exit 0
+fi
+echo $1
 if [ $UID -ne 0 ]; then
 	echo "Start this script $(basename $0) as a root"
 	exit 1
@@ -19,7 +23,23 @@ if [ "$PHP" == "(none)" ]; then
 	echo 'Installing php'
 	apt-get install php5 libapache2-mod-php5 php5-mcrypt -y
 fi 
+echo 'File moving and service restart'
 cp ui.php /var/www/html/
 touch /dev/shm/Bittorrent.Peers
 chmod 777 /dev/shm/Bittorrent.Peers
 service apache2 restart
+echo 'done'
+TOR=`/usr/bin/apt-cache policy transmission-cli | grep Installed | awk '{print $2}'`
+if [ "$TOR" == "(none)" ]; then
+	apt-get install transmission-cli transmission-daemon -y
+	echo "Transmission installed"
+fi
+transmission-create -o test.torrent -t http://192.168.0.101:80/ui.php 
+$1
+echo "torrent file made"
+RTOR=`/usr/bin/apt-cache policy rtorrent | grep Installed | awk '{print $2}'`
+if [ "$RTOR" == "(none)" ]; then
+	apt-get install rtorrent -y
+	echo "Rtorrent installed"
+fi 
+
