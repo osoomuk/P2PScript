@@ -2,6 +2,7 @@
 
 echo $1
 echo $2
+echo $3
 if [ $UID -ne 0 ]; then
 	echo "Start this script $(basename $0) as a root"
 	exit 1
@@ -13,6 +14,10 @@ if [ -z "$1" ]; then
 fi
 if [ -z "$2" ]; then
 	echo "Please insert torrent file name as a argument"
+	exit 0
+fi
+if [ -z "$3" ]; then
+	echo "Please insert tracker address"
 	exit 0
 fi
 #Kontrollime kas apache2 on
@@ -41,7 +46,8 @@ if [ "$TOR" == "(none)" ]; then
 	apt-get install transmission-cli transmission-daemon -y
 	echo "Transmission installed"
 fi
-transmission-create -o $2 -t http://192.168.0.101:80/ui.php $1
+transmission-create -o $2 -t $3 $1
+#transmission-create -o $2 -t http://172.16.222.245:80/ui.php $1
 echo "torrent file made"
 RTOR=`/usr/bin/apt-cache policy rtorrent | grep Installed | awk '{print $2}'`
 ls -a
