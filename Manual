@@ -1,0 +1,25 @@
+Juhend serveri poole paigaldamiseks
+(Muutub, kui teha paketina)
+Jälguri paigaldamiseks serverisse ning failide levitamiseks on vajalikud järgmised sammud:
+
+1.Alla laadida skriptid tracker.sh ning ui.php, mis asuvad repositooriumis, mille aadressiks on:
+https://github.com/osoomuk/P2PScript
+
+2.Alla laetavad skriptid tuleb salvestada samasse kausta. 
+Jälguri paigaldamiseks tuleb käivitada juur-kasutaja õigustes skript tracker.sh. Sinna tuleb lisada
+argumendid, mis tähistavad faili nime, mida jagada on tarvis. Järgmine argument tähistab soovitud torrenti faili nime ning viimase argumendina jälguri aadressi.   
+Näide skripti käivitamisest: 
+sudo bash tracker.sh viirus.py viirust.torrent https://192.168.0.101:80/ui.php 
+
+3. Klientidele jagamiseks on vaja saata loodud torrent fail. 
+Siia mingi wget vms. 
+
+
+
+Juhend kliendile 
+
+1.Alla laadida lingi https://github.com/osoomuk/P2PScript alt skript loading.sh
+2.Käivitada antud skript juur-kasutaja õigustes ning lisada argumendina torrent fail, mida soovid avada
+Näide skripti käivitamisest: 
+sudo bash loading.sh viirus.torrent
+3.Avatava rakenduse avamisel valida sobiv asukoht, kuhu fail salvestada ning vajutada "Enter"
